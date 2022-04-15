@@ -1,0 +1,5 @@
+dist
+DS_STORE
+.idea
+.vs
+node_modules
