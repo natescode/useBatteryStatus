@@ -1,23 +1,43 @@
 import { useEffect, useState } from "react";
 
-const useBatteryStatus = () => {
+const useBatteryStatus = (): Battery => {
 
-    let [batteryManager, setBatteryManager] = useState<BatteryManager>();
+    let [batteryState, setBatteryState] = useState<BatteryState>({
+        level: 0,
+        charging: false,
+        chargingTime: 0,
+        dischargingTime: 0,
+    });
 
     useEffect(() => {
         async function getNavigator() {
             navigator.getBattery().then((batteryManager: BatteryManager) => {
-                setBatteryManager(batteryManager)
+                setBatteryState(batteryManager)
+                batteryManager.addEventListener("chargingchange", () => {
+                    setBatteryState(batteryManager);
+                });
+                batteryManager.addEventListener("chargingtimechange", () => {
+                    setBatteryState(batteryManager);
+                });
+                batteryManager.addEventListener("dischargingtimechange", () => {
+                    setBatteryState(batteryManager);
+                });
                 batteryManager.addEventListener("levelchange", () => {
-                    setBatteryManager(batteryManager);
+                    setBatteryState(batteryManager);
                 });
             });
         };
 
         getNavigator();
 
-    }, [batteryManager]);
+    }, [batteryState]);
 
-    return batteryManager;
+    // Check browser compatiblity
+    if (!navigator.getBattery) {
+        return {
+            isSupported: false
+        }
+    }
+    return { ...batteryState, isSupported: true };
 }
 export default useBatteryStatus;

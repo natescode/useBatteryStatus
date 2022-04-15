@@ -1,29 +1,30 @@
 /**
- * BatteryState 
- * Required type guard to check if API is supported
- * Required type guard to check if API is loaded
+ * Battery
+ * Requires a type guard to check if API is supported
  */
-declare type UseBatteryState =
+declare type Battery =
     | { isSupported: false }
-    | { isSupported: true; fetched: false }
-    | (BatteryState & { isSupported: true; fetched: true });
+    | (BatteryState & { isSupported: true; });
 
+/** Holds all battery properties */
 declare interface BatteryState {
-    charging: boolean;
-    chargingTime: number;
-    dischargingTime: number;
-    level: number;
-}
-
-declare interface BatteryManager extends EventTarget {
     level: number,
-    charging?: boolean,
-    chargingTime?: number,
+    charging: boolean,
+    chargingTime: number,
     dischargingTime: number,
-    onchargingchange: () => void;
-    onchargingtimechange: () => void;
-    ondischargingtimechange: () => void;
-    onlevelchange: () => void;
+}
+/**
+ * [BatteryManager](https://developer.mozilla.org/en-US/docs/Web/API/BatteryManager)
+ */
+declare interface BatteryManager extends EventTarget, BatteryState {
+    level: number,
+    charging: boolean,
+    chargingTime: number,
+    dischargingTime: number,
+    onchargingchange?: () => void;
+    onchargingtimechange?: () => void;
+    ondischargingtimechange?: () => void;
+    onlevelchange?: () => void;
 }
 
 declare interface Navigator {
