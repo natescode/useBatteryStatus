@@ -1,6 +1,6 @@
 {
   "name": "battery-status-hook",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Custom React Hook for Battery Status API",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -16,7 +16,7 @@
     "React",
     "Hook",
     "Battery",
-    "Status"
+    "Typescript"
   ],
   "author": "NatesCode LLC",
   "license": "MIT",

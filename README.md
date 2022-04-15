@@ -1,16 +1,22 @@
 # React Hook for the Battery Status API 
 
-This API is currently only supported in Chrome 38+, Edge 78+, Opera 25+ but not in Firefox, Safari or IE.
+> A react hook to get battery status
 
-## Installation
+[![NPM](https://img.shields.io/npm/v/battery-status-hook.svg)](https://www.npmjs.com/package/battery-status-hook) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com) ![ts](https://badgen.net/badge/Built%20With/TypeScript/blue)
 
-    npm i battery-status-hook
+## Install
+
+```bash
+npm install --save use-battery-hook
+```
+
 
 ## Usage
+```jsx
+import React from 'react'
+import { useBatteryStatus } from 'battery-status-hook'
 
-    import { useBatteryStatus } from 'battery-status-hook'
-
-    const Battery = (): ReactElement => {
+const Battery = (): ReactElement => {
         let battery = useBatteryStatus();
     return (
         battery.isSupported ? 
@@ -18,3 +24,8 @@ This API is currently only supported in Chrome 38+, Edge 78+, Opera 25+ but not 
             : <h1>Battery Status API not supported in this browser</h1>
     )
 }
+```
+
+## License
+
+MIT © [NatesCode](https://github.com/natescode)
